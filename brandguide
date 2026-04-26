@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YTU Brand Refresh — Logo Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,300&family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --violet: #2D1B69;
+    --amber: #F5A623;
+    --coral: #FF6B6B;
+    --slate-white: #F8F9FA;
+    --cream: #FFFBF5;
+    --charcoal: #1C1C1E;
+    --mid-gray: #6B7280;
+    --light-gray: #E5E7EB;
+    --navy-mid: #1a2d42;
+    --violet-mid: #3d2680;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #f0f0f0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .doc-header {
+    padding: 64px 80px 48px;
+    border-bottom: 1px solid #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doc-header-left h1 {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .doc-header-left h2 {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .doc-header-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #444;
+    text-align: right;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section {
+    padding: 64px 80px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1f1f1f;
+  }
+
+  /* ── LOGO OPTION GRID ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+
+  .logo-card {
+    background: #111;
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .logo-card.option-a::before { background: var(--amber); }
+  .logo-card.option-b::before { background: var(--coral); }
+  .logo-card.option-c::before { background: linear-gradient(90deg, var(--amber), var(--coral)); }
+
+  .option-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .logo-display {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  /* OPTION A — Split Wordmark */
+  .logo-a-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .logo-a-monogram {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 42px;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1;
+  }
+  .logo-a-monogram span {
+    color: var(--amber);
+  }
+  .logo-a-fullname {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-a-divider {
+    width: 1px;
+    height: 12px;
+    background: var(--amber);
+    opacity: 0.6;
+  }
+  .logo-a-descriptor {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+  }
+
+  /* OPTION B — Name Forward */
+  .logo-b-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .logo-b-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .logo-b-underline {
+    width: 100%;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--amber) 0%, transparent 100%);
+  }
+  .logo-b-descriptor {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-top: 2px;
+  }
+
+  /* OPTION C — Abbreviated + Spelled Out */
+  .logo-c-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-c-badge {
+    background: var(--amber);
+    color: #0a0a0a;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+    padding: 8px 12px;
+    line-height: 1;
+  }
+  .logo-c-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .logo-c-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: #fff;
+    line-height: 1;
+  }
+  .logo-c-descriptor {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .option-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    border-top: 1px solid #1f1f1f;
+    padding-top: 20px;
+  }
+  .option-desc strong {
+    color: #888;
+    font-weight: 500;
+  }
+
+  /* ── WING VARIANTS ── */
+  .wing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .wing-card {
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .wing-card.services {
+    background: var(--navy);
+  }
+  .wing-card.education {
+    background: var(--violet);
+  }
+
+  .wing-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .wing-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+  .wing-card.services .wing-tag {
+    color: var(--amber);
+    border-color: rgba(245,166,35,0.3);
+  }
+  .wing-card.education .wing-tag {
+    color: var(--coral);
+    border-color: rgba(255,107,107,0.3);
+  }
+
+  /* Wing logos using Option C */
+  .wing-logo {
+    margin-bottom: 28px;
+  }
+  .wing-logo-c-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .wing-badge-services {
+    background: var(--amber);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    padding: 7px 11px;
+    line-height: 1;
+  }
+  .wing-badge-education {
+    background: var(--coral);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    padding: 7px 11px;
+    line-height: 1;
+  }
+  .wing-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.9);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .wing-descriptor-services {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .wing-descriptor-education {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+
+  .wing-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.25;
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 20px;
+    max-width: 340px;
+  }
+
+  .wing-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+    max-width: 300px;
+  }
+
+  .wing-accent-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .wing-card.services .wing-accent-line {
+    background: linear-gradient(90deg, var(--amber), transparent);
+  }
+  .wing-card.education .wing-accent-line {
+    background: linear-gradient(90deg, var(--coral), transparent);
+  }
+
+  /* ── COLOR PALETTE ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+  }
+  .swatch {
+    height: 120px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 12px;
+  }
+  .swatch-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .swatch-hex {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    opacity: 0.6;
+  }
+  .swatch-role {
+    font-size: 9px;
+    opacity: 0.5;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+  .type-card {
+    background: #111;
+    padding: 40px;
+  }
+  .type-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 24px;
+  }
+  .type-sample-display {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+  .type-sample-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #888;
+    font-weight: 300;
+  }
+  .type-sample-serif {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .type-sample-serif-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .type-sample-mono {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+    line-height: 2;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── RECOMMENDATION ── */
+  .rec-section {
+    padding: 64px 80px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .rec-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+  .rec-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .rec-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .rec-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: #111;
+    border-left: 2px solid var(--amber);
+  }
+  .rec-item-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    min-width: 20px;
+    padding-top: 2px;
+  }
+  .rec-item-text {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+  }
+  .rec-item-text strong {
+    color: #ccc;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .logo-card, .wing-card, .type-card, .rec-item {
+    animation: fadeUp 0.5s ease both;
+  }
+  .logo-card:nth-child(1) { animation-delay: 0.1s; }
+  .logo-card:nth-child(2) { animation-delay: 0.2s; }
+  .logo-card:nth-child(3) { animation-delay: 0.3s; }
+  .wing-card:nth-child(1) { animation-delay: 0.15s; }
+  .wing-card:nth-child(2) { animation-delay: 0.25s; }
+  .rec-item:nth-child(1) { animation-delay: 0.1s; }
+  .rec-item:nth-child(2) { animation-delay: 0.2s; }
+  .rec-item:nth-child(3) { animation-delay: 0.3s; }
+
+  /* hover states */
+  .logo-card { transition: background 0.2s; cursor: pointer; }
+  .logo-card:hover { background: #161616; }
+  .logo-card.option-c:hover { background: #141414; outline: 1px solid var(--amber); outline-offset: -1px; }
+
+  /* recommended badge */
+  .rec-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--amber);
+    color: #0a0a0a;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-left">
+    <h1>Brand Identity Refresh</h1>
+    <h2>Your Tech Unicorn<br>Logo Exploration</h2>
+  </div>
+  <div class="doc-header-right">
+    Version 1.0<br>
+    March 2026<br>
+    yourtechunicorn.com<br>
+    —<br>
+    3 options · 2 wings · 1 system
+  </div>
+</div>
+
+<!-- SECTION 01 — LOGO OPTIONS -->
+<div class="section">
+  <div class="section-label">01 — Logo Options</div>
+  <div class="logo-grid">
+
+    <!-- OPTION A -->
+    <div class="logo-card option-a">
+      <span class="option-tag">Option A — Split Wordmark</span>
+      <div class="logo-display">
+        <div class="logo-a-wrap">
+          <div class="logo-a-monogram">YT<span>U</span></div>
+          <div class="logo-a-fullname">
+            your tech unicorn
+            <div class="logo-a-divider"></div>
+            <span class="logo-a-descriptor">Systems & Automation</span>
+          </div>
+        </div>
+      </div>
+      <p class="option-desc">
+        <strong>Bold monogram anchors the mark.</strong> YTU reads like a firm name — confident, scalable. Works well at any size. The divider keeps the descriptor feeling like a qualifier, not an afterthought.
+      </p>
+    </div>
+
+    <!-- OPTION B -->
+    <div class="logo-card option-b">
+      <span class="option-tag">Option B — Name Forward</span>
+      <div class="logo-display">
+        <div class="logo-b-wrap">
+          <div class="logo-b-name">your tech unicorn</div>
+          <div class="logo-b-underline"></div>
+          <div class="logo-b-descriptor">Systems & Automation</div>
+        </div>
+      </div>
+      <p class="option-desc">
+        <strong>Lowercase feels modern and deliberate.</strong> Think Linear, Notion, Basecamp. The gradient underline is the only decoration — everything else is restraint. Slightly softer positioning than A.
+      </p>
+    </div>
+
+    <!-- OPTION C — RECOMMENDED -->
+    <div class="logo-card option-c" style="position:relative;">
+      <div class="rec-badge">★ Recommended</div>
+      <span class="option-tag">Option C — Badge + Spelled Out</span>
+      <div class="logo-display">
+        <div class="logo-c-wrap">
+          <div class="logo-c-badge">YTU</div>
+          <div class="logo-c-text">
+            <span class="logo-c-name">your tech unicorn</span>
+            <span class="logo-c-descriptor">Systems & Automation</span>
+          </div>
+        </div>
+      </div>
+      <p class="option-desc">
+        <strong>Most flexible system.</strong> The badge is swappable — amber for services, coral for education. Descriptor line changes per wing. The YTU badge works standalone on social, merch, and email.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02 — WING VARIANTS (Option C applied) -->
+<div class="section">
+  <div class="section-label">02 — Wing Variants (Option C Applied)</div>
+  <div class="wing-grid">
+
+    <!-- SERVICES WING -->
+    <div class="wing-card services">
+      <div class="wing-noise"></div>
+      <div>
+        <span class="wing-tag">Wing 01 · Services</span>
+        <div class="wing-logo">
+          <div class="wing-logo-c-wrap">
+            <div class="wing-badge-services">YTU</div>
+            <div class="logo-c-text">
+              <span class="wing-name">your tech unicorn</span>
+              <span class="wing-descriptor-services">Systems & Automation</span>
+            </div>
+          </div>
+        </div>
+        <div class="wing-tagline">Revenue systems.<br>Rare by design.</div>
+        <p class="wing-sub">Done-for-you funnel architecture, CRM systems, and automation builds for founders and ops teams.</p>
+      </div>
+      <div class="wing-accent-line"></div>
+    </div>
+
+    <!-- EDUCATION WING -->
+    <div class="wing-card education">
+      <div class="wing-noise"></div>
+      <div>
+        <span class="wing-tag">Wing 02 · Education</span>
+        <div class="wing-logo">
+          <div class="wing-logo-c-wrap">
+            <div class="wing-badge-education">YTU</div>
+            <div class="logo-c-text">
+              <span class="wing-name">your tech unicorn</span>
+              <span class="wing-descriptor-education">Tech Made Easy</span>
+            </div>
+          </div>
+        </div>
+        <div class="wing-tagline">Build it. Automate it.<br>Launch it.</div>
+        <p class="wing-sub">Workshops, templates, and the Tech Vault — practical tech training for people who sell things online.</p>
+      </div>
+      <div class="wing-accent-line"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03 — COLOR SYSTEM -->
+<div class="section">
+  <div class="section-label">03 — Color System</div>
+  <div class="palette-grid">
+    <div class="swatch" style="background:#0D1B2A;">
+      <span class="swatch-name" style="color:#fff;">Deep Navy</span>
+      <span class="swatch-hex" style="color:#fff;">#0D1B2A</span>
+      <span class="swatch-role" style="color:#fff;">Services Primary</span>
+    </div>
+    <div class="swatch" style="background:#2D1B69;">
+      <span class="swatch-name" style="color:#fff;">Deep Violet</span>
+      <span class="swatch-hex" style="color:#fff;">#2D1B69</span>
+      <span class="swatch-role" style="color:#fff;">Education Primary</span>
+    </div>
+    <div class="swatch" style="background:#F5A623;">
+      <span class="swatch-name" style="color:#0a0a0a;">Amber</span>
+      <span class="swatch-hex" style="color:#0a0a0a;">#F5A623</span>
+      <span class="swatch-role" style="color:#0a0a0a;">Shared Accent</span>
+    </div>
+    <div class="swatch" style="background:#FF6B6B;">
+      <span class="swatch-name" style="color:#fff;">Coral</span>
+      <span class="swatch-hex" style="color:#fff;">#FF6B6B</span>
+      <span class="swatch-role" style="color:#fff;">Education Accent</span>
+    </div>
+    <div class="swatch" style="background:#F8F9FA; border: 1px solid #222;">
+      <span class="swatch-name" style="color:#1C1C1E;">Slate White</span>
+      <span class="swatch-hex" style="color:#1C1C1E;">#F8F9FA</span>
+      <span class="swatch-role" style="color:#555;">Services BG</span>
+    </div>
+    <div class="swatch" style="background:#FFFBF5; border: 1px solid #222;">
+      <span class="swatch-name" style="color:#1C1C1E;">Soft Cream</span>
+      <span class="swatch-hex" style="color:#1C1C1E;">#FFFBF5</span>
+      <span class="swatch-role" style="color:#555;">Education BG</span>
+    </div>
+    <div class="swatch" style="background:#1C1C1E;">
+      <span class="swatch-name" style="color:#fff;">Charcoal</span>
+      <span class="swatch-hex" style="color:#fff;">#1C1C1E</span>
+      <span class="swatch-role" style="color:#aaa;">Body Text</span>
+    </div>
+    <div class="swatch" style="background:#6B7280;">
+      <span class="swatch-name" style="color:#fff;">Mid Gray</span>
+      <span class="swatch-hex" style="color:#fff;">#6B7280</span>
+      <span class="swatch-role" style="color:#ddd;">Secondary Text</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04 — TYPOGRAPHY -->
+<div class="section">
+  <div class="section-label">04 — Typography System</div>
+  <div class="type-grid">
+
+    <div class="type-card">
+      <div class="type-label">DM Sans — Headlines & UI</div>
+      <div class="type-sample-display">Revenue<br>Systems.</div>
+      <p class="type-sample-body">Used for all UI text, navigation, body copy, and headlines. Geometric and neutral with strong weight range — from 300 light to 900 black.</p>
+    </div>
+
+    <div class="type-card">
+      <div class="type-label">DM Serif Display — Editorial Accent</div>
+      <div class="type-sample-serif">"The systems person you didn't think existed."</div>
+      <p class="type-sample-serif-sub">Used sparingly for taglines, pull quotes, and hero statements. The italic gives warmth without losing authority.</p>
+    </div>
+
+    <div class="type-card">
+      <div class="type-label">DM Mono — Labels, Data & Badges</div>
+      <div class="type-sample-mono">
+        → 10+ automation workflows<br>
+        · Systems Architect<br>
+        ★ Recommended<br>
+        01 — Revenue Systems<br>
+        #F5A623 · Amber
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 05 — RECOMMENDATION -->
+<div class="rec-section">
+  <div>
+    <div class="rec-label">05 — Recommendation</div>
+    <div class="rec-title">Why Option C<br>is the right<br>system.</div>
+  </div>
+  <div class="rec-body">
+    <div class="rec-item">
+      <span class="rec-item-num">01</span>
+      <div class="rec-item-text">
+        <strong>Scales across both wings without confusion</strong>
+        The YTU badge stays constant. Only the badge color and descriptor line changes — amber + "Systems & Automation" for services; coral + "Tech Made Easy" for education. The parent brand remains unified.
+      </div>
+    </div>
+    <div class="rec-item">
+      <span class="rec-item-num">02</span>
+      <div class="rec-item-text">
+        <strong>The YTU badge is a standalone asset</strong>
+        You can use it solo on social profile pictures, email signatures, course platforms, and Slack. It's your mark — not just a logo.
+      </div>
+    </div>
+    <div class="rec-item">
+      <span class="rec-item-num">03</span>
+      <div class="rec-item-text">
+        <strong>Amber is your brand thread</strong>
+        It appears in both wings — as the badge fill on services, and as a supporting accent on education. Someone who moves from your free workshops to hiring you for a full systems build sees the same gold thread. Trust transfers.
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
