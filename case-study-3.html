@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: End-to-End GHL Client Journey System — Your Tech Unicorn</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,300&family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B2A;--navy-mid:#1a2d42;--violet:#2D1B69;
+  --amber:#F5A623;--amber-dim:rgba(245,166,35,.12);--amber-border:rgba(245,166,35,.28);
+  --coral:#FF6B6B;--white:#fff;--off-white:#F8F9FA;
+  --text-primary:#f0f0f0;--text-secondary:#8a96a3;--text-muted:#4a5568;
+  --border:rgba(255,255,255,.07);--bg:#080d12;--surface:#0f1c2a;--surface-2:#152336;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+p{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:16px;}
+p:last-child{margin-bottom:0;}
+h2{font-weight:700;font-size:26px;letter-spacing:-.02em;color:var(--white);margin-bottom:16px;line-height:1.2;}
+h3{font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(8,13,18,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 64px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-badge{background:var(--amber);color:var(--navy);font-family:'DM Sans',sans-serif;font-weight:900;font-size:16px;letter-spacing:-.02em;padding:5px 9px;line-height:1;}
+.nav-text{display:flex;flex-direction:column;gap:1px;}
+.nav-name{font-size:13px;letter-spacing:.03em;color:var(--white);}
+.nav-descriptor{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);text-decoration:none;}
+.nav-cta{background:transparent;border:1px solid var(--amber-border);color:var(--amber);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;cursor:pointer;transition:background .2s;text-decoration:none;}
+.nav-cta:hover{background:var(--amber-dim);text-decoration:none;}
+
+.hero{padding:80px 64px 64px;border-bottom:1px solid var(--border);}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.eyebrow-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border);padding:5px 12px;}
+.eyebrow-div{height:1px;width:40px;background:var(--amber-border);}
+.eyebrow-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);}
+.hero h1{font-weight:900;font-size:clamp(32px,5vw,60px);letter-spacing:-.03em;line-height:1.05;color:var(--white);max-width:780px;margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--amber);}
+.hero-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:19px;color:var(--text-secondary);max-width:540px;line-height:1.5;margin-bottom:44px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);max-width:800px;}
+.stat-block{background:var(--surface);padding:24px 20px;}
+.stat-num{font-weight:900;font-size:28px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:5px;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);}
+
+.section{padding:72px 64px;border-bottom:1px solid var(--border);}
+.section-inner{max-width:900px;margin:0 auto;}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:32px;display:flex;align-items:center;gap:14px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:160px;}
+
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.overview-row{background:var(--surface);padding:16px 22px;display:flex;gap:18px;align-items:flex-start;}
+.ov-key{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);min-width:110px;padding-top:2px;}
+.ov-val{font-size:14px;color:var(--text-primary);line-height:1.5;}
+
+.platform-stack{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin:28px 0;}
+.platform-row{background:var(--surface);padding:14px 22px;display:flex;align-items:center;gap:18px;}
+.platform-name{font-weight:700;font-size:14px;color:var(--white);min-width:220px;}
+.platform-role{font-size:13px;color:var(--text-secondary);margin:0;flex:1;}
+
+.steps{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.step{background:var(--surface);padding:24px 28px;display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:start;transition:background .2s;}
+.step:hover{background:var(--surface-2);}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--amber);padding-top:2px;}
+.step-content h3{margin-bottom:6px;}
+.step-content p{font-size:14px;margin:0;}
+
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.area-card{background:var(--surface);padding:28px;position:relative;}
+.area-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber-border);}
+.area-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--text-muted);margin-bottom:14px;display:block;}
+.area-items{list-style:none;margin-top:10px;}
+.area-items li{font-size:13px;color:var(--text-secondary);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.45;}
+.area-items li:last-child{border-bottom:none;}
+.area-items li::before{content:'→';color:var(--amber);font-size:11px;margin-top:1px;flex-shrink:0;font-family:'DM Mono',monospace;}
+
+.flow-chain{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin:28px 0;}
+.flow-row{background:var(--surface);padding:14px 22px;display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;}
+.flow-row:nth-child(even){background:var(--surface-2);}
+.flow-stage{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);padding-top:1px;}
+.flow-desc{font-size:13px;color:var(--text-secondary);margin:0;line-height:1.6;}
+
+.path-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:28px 0;}
+.path-card{background:var(--surface);padding:22px 18px;}
+.path-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:block;}
+.path-items{list-style:none;}
+.path-items li{font-size:12px;color:var(--text-secondary);padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:6px;line-height:1.4;}
+.path-items li:last-child{border-bottom:none;}
+.path-items li::before{content:'→';color:var(--amber);font-size:10px;margin-top:2px;flex-shrink:0;font-family:'DM Mono',monospace;}
+
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.result-card{background:var(--surface);padding:28px 24px;}
+.result-card.featured{background:var(--navy);}
+.result-val{font-weight:900;font-size:36px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:6px;}
+.result-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;display:block;}
+.result-note{font-size:13px;color:var(--text-secondary);margin:0;line-height:1.5;}
+
+.tools-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px;}
+.tool-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);padding:5px 12px;}
+
+.callout{background:var(--surface);border-left:3px solid var(--amber);padding:22px 26px;margin:20px 0;}
+.callout p{font-family:'DM Serif Display',serif;font-style:italic;font-size:17px;color:var(--text-primary);margin:0;line-height:1.6;}
+
+.diff-section{background:var(--navy);padding:72px 64px;border-bottom:1px solid var(--border);}
+.diff-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start;}
+.diff-heading{font-family:'DM Serif Display',serif;font-style:italic;font-size:32px;color:var(--white);line-height:1.2;margin-bottom:12px;}
+.diff-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:block;}
+.diff-points{display:flex;flex-direction:column;gap:16px;}
+.diff-point{display:flex;gap:18px;padding:18px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+.diff-icon{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);min-width:22px;padding-top:2px;}
+.diff-text h3{color:var(--off-white);margin-bottom:5px;font-size:14px;}
+.diff-text p{font-size:13px;margin:0;line-height:1.65;}
+
+.cta-section{padding:80px 64px;text-align:center;border-top:1px solid var(--border);}
+.cta-heading{font-weight:900;font-size:clamp(26px,4vw,42px);letter-spacing:-.03em;color:var(--white);margin-bottom:10px;}
+.cta-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;color:var(--text-secondary);margin-bottom:36px;}
+.btn-primary{background:var(--amber);color:var(--navy);font-weight:700;font-size:14px;padding:13px 34px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s;}
+.btn-primary:hover{opacity:.9;text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--text-secondary);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border:1px solid var(--border);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;margin-left:10px;}
+.btn-ghost:hover{border-color:var(--amber-border);color:var(--amber);text-decoration:none;}
+
+footer{background:var(--surface);padding:26px 64px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-muted);}
+.footer-links{display:flex;gap:26px;list-style:none;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:color .2s;}
+.footer-links a:hover{color:var(--amber);text-decoration:none;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;} .nav-links{display:none;}
+  .hero,.section,.diff-section,.cta-section{padding-left:20px;padding-right:20px;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .overview-grid,.areas,.results-grid,.path-grid{grid-template-columns:1fr;}
+  .diff-inner{grid-template-columns:1fr;gap:36px;}
+  footer{padding:20px;flex-direction:column;gap:14px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems &amp; Automation</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/case-study/" class="active">Case Study</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+  </ul>
+  <a href="https://yourtechunicorn.com/contact/" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-tag">Case Study</span>
+    <div class="eyebrow-div"></div>
+    <span class="eyebrow-lbl">Funnel Architecture · Client Journey Design · GoHighLevel</span>
+  </div>
+  <h1>Full Client Journey System<br>Built from <em>Zero</em></h1>
+  <p class="hero-sub">Every stage of the client experience — from first click to alumni follow-up — designed, automated, and handed over as a self-running system.</p>
+  <div class="hero-stats">
+    <div class="stat-block"><div class="stat-num">14</div><div class="stat-lbl">Workflows Built</div></div>
+    <div class="stat-block"><div class="stat-num">15+</div><div class="stat-lbl">Email Sequences</div></div>
+    <div class="stat-block"><div class="stat-num">4-path</div><div class="stat-lbl">Post-Call Routing</div></div>
+    <div class="stat-block"><div class="stat-num">0</div><div class="stat-lbl">Manual Enrollment Steps</div></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">01 — Project Overview</div>
+    <div class="overview-grid">
+      <div class="overview-row"><span class="ov-key">Client</span><span class="ov-val">Health &amp; Wellness Coaching Practice — digital programs and private coaching</span></div>
+      <div class="overview-row"><span class="ov-key">My Role</span><span class="ov-val">Lead Systems &amp; Implementation Specialist — agency engagement</span></div>
+      <div class="overview-row"><span class="ov-key">Starting Point</span><span class="ov-val">No existing unified system — all stages of the client journey were disconnected or manual</span></div>
+      <div class="overview-row"><span class="ov-key">Platform</span><span class="ov-val">GoHighLevel — built from zero, single consolidated environment</span></div>
+      <div class="overview-row"><span class="ov-key">Scope</span><span class="ov-val">Lead capture · Quiz lead magnet · Discovery call system · Enrollment &amp; contracts · Course delivery · Alumni sequence</span></div>
+      <div class="overview-row"><span class="ov-key">Deliverables</span><span class="ov-val">14 workflows · 15+ email templates · 10 forms · CRM pipeline · Canva assets · 12 training videos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">02 — The Challenge</div>
+    <h2>No system — just a stack of disconnected pieces</h2>
+    <p>When this engagement started, the client had a functioning coaching practice with no automated client journey to support it. Leads came in manually. Discovery calls were tracked informally. Enrollment required back-and-forth emails. Program delivery had no structured onboarding. The business was growing faster than the infrastructure holding it together.</p>
+    <p>The goal was to build a complete end-to-end system inside GoHighLevel that would take a prospect from their first interaction all the way through enrollment, program completion, and alumni follow-up — without the business owner managing every step manually.</p>
+
+    <div class="platform-stack">
+      <div class="platform-row"><span class="platform-name">Lead Capture</span><p class="platform-role">No unified entry point — no lead magnet, no automated follow-up, no CRM tracking</p></div>
+      <div class="platform-row"><span class="platform-name">Discovery Calls</span><p class="platform-role">Calendar booking existed but had no reminders, no pre-qualification, no post-call automation</p></div>
+      <div class="platform-row"><span class="platform-name">Enrollment</span><p class="platform-role">Contracts sent manually — no payment link automation, no login delivery sequence</p></div>
+      <div class="platform-row"><span class="platform-name">Program Delivery</span><p class="platform-role">Course content existed but had no structured onboarding or automated intake process</p></div>
+      <div class="platform-row"><span class="platform-name">Post-Program</span><p class="platform-role">No alumni sequence, no testimonial collection, no automated newsletter opt-in</p></div>
+    </div>
+
+    <div class="callout">
+      <p>"The business needed infrastructure that could scale without creating a second full-time job for the owner."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">03 — Build Process</div>
+    <h2>Architecture first, then execution</h2>
+    <p>Building a client journey system from scratch requires mapping every possible path before writing a single workflow. Where I start every engagement like this.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>Discovery &amp; Requirements Mapping</h3>
+          <p>Full audit of the business model, client stages, and every touchpoint in the existing (informal) process. Every workflow starts as a flowchart before it becomes an automation — manual steps are mapped first so nothing gets missed in the build.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>Journey Architecture &amp; Sequencing</h3>
+          <p>Mapped the full client lifecycle: lead entry points, discovery call paths, four post-call outcomes, enrollment chain, and post-program flow. Built the logic structure before a single workflow was created — this is what prevents gaps and double-triggers later.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>Phased Build Inside GHL</h3>
+          <p>Built in stages, starting with lead capture and working downstream. Each stage was tested before moving to the next. The enrollment chain — payment to contract to login — was built last and only after everything upstream was confirmed working.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>End-to-End QA &amp; Beta Testing</h3>
+          <p>Every workflow, form, and email sequence tested with real contacts before go-live. Edge cases — multiple form submissions, duplicate email triggers, re-entry scenarios, coupon behavior across payment plans — identified and resolved before handoff.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <h3>Iteration &amp; Refinement</h3>
+          <p>Beta feedback incorporated in real time. Scoring errors corrected, workflow re-entry logic adjusted, email sequences refined based on what the client observed in testing. The system shipped cleaner because of it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">06</span>
+        <div class="step-content">
+          <h3>Client Training &amp; Documentation Handoff</h3>
+          <p>12 short tutorial videos recorded covering every routine task the client would need to manage independently. Full system documentation delivered alongside. The goal: the client should never need to call me to run their own system.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">04 — Scope of Build</div>
+    <h2>Six systems. One connected journey.</h2>
+    <p>Every component was designed to hand off cleanly to the next. A lead enters, gets nurtured, books a call, and — depending on the outcome — is routed into the right path automatically.</p>
+
+    <div class="areas">
+
+      <div class="area-card">
+        <span class="area-num">Area 01</span>
+        <h3>Lead Capture &amp; Entry Points</h3>
+        <ul class="area-items">
+          <li>Public contact form (website embed) with re-entry protection</li>
+          <li>Admin form for manually referred or internally added leads</li>
+          <li>Lead magnet quiz as a third entry path for cold traffic</li>
+          <li>All three entry points feed into the same CRM pipeline and trigger the same nurture start</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 02</span>
+        <h3>Scored Lead Magnet Quiz</h3>
+        <ul class="area-items">
+          <li>Multi-question assessment with multi-select checkbox scoring</li>
+          <li>Three score tiers — each delivering a personalized result email</li>
+          <li>Post-quiz 3-email nurture sequence to warm leads toward booking</li>
+          <li>Conditional workflow logic routes leads based on calculated score</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 03</span>
+        <h3>Discovery Call System</h3>
+        <ul class="area-items">
+          <li>GHL calendar with pre-qualification form shown inline after booking</li>
+          <li>Automated confirmation email sent immediately on booking</li>
+          <li>Three-step reminder sequence: 24 hours, 1 hour, and 5 minutes before the call</li>
+          <li>Separate automated responses for cancelled calls and no-shows</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 04</span>
+        <h3>4-Path Post-Call Routing</h3>
+        <p style="font-size:13px;margin-bottom:14px;">Business owner moves the contact to a CRM pipeline stage after each call. Each stage triggers a distinct automated path.</p>
+        <div class="path-grid" style="margin:0;grid-template-columns:1fr 1fr;">
+          <div class="path-card" style="background:var(--surface-2);">
+            <span class="path-label">YES</span>
+            <ul class="path-items">
+              <li>Payment link sent</li>
+              <li>Contract triggered on payment</li>
+              <li>Login delivered on signature</li>
+            </ul>
+          </div>
+          <div class="path-card" style="background:var(--surface-2);">
+            <span class="path-label">MAYBE</span>
+            <ul class="path-items">
+              <li>2-email nurture</li>
+              <li>Discount code included</li>
+              <li>Re-invite to book</li>
+            </ul>
+          </div>
+          <div class="path-card" style="background:var(--surface-2);">
+            <span class="path-label">NOT YET</span>
+            <ul class="path-items">
+              <li>2-email nurture</li>
+              <li>Discount code included</li>
+              <li>Future program opt-in</li>
+            </ul>
+          </div>
+          <div class="path-card" style="background:var(--surface-2);">
+            <span class="path-label">NOT A FIT</span>
+            <ul class="path-items">
+              <li>2-email sequence</li>
+              <li>Wellness resources</li>
+              <li>Newsletter opt-in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 05</span>
+        <h3>Enrollment &amp; Onboarding Chain</h3>
+        <ul class="area-items">
+          <li>Payment link delivery triggers contract via GHL Proposals</li>
+          <li>Digital signature confirmed before login is released — no manual checks</li>
+          <li>Membership account created and login credentials delivered automatically</li>
+          <li>Onboarding email sequence starts 1 minute after login delivery</li>
+          <li>Clinic intake form sent and followed up automatically when contact is tagged</li>
+          <li>Discount code logic tested for both one-time and 3-pay plan scenarios</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 06</span>
+        <h3>Program Delivery &amp; Alumni</h3>
+        <ul class="area-items">
+          <li>Course structure built in GHL Memberships with thumbnails and categories</li>
+          <li>Oils onboarding bonus section added for clients with the starter bundle</li>
+          <li>Alumni tag auto-subscribes client to newsletter and future program list</li>
+          <li>Alumni email sequence with testimonial collection and follow-up reminder</li>
+          <li>Testimonial follow-up sent conditionally — only if form not yet submitted</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p style="margin-top:28px;">In addition to the six core systems, the engagement included building a newsletter template, rebranding 10+ protocol guides and educational content assets in Canva, and setting up email deliverability infrastructure (SPF, DKIM, DMARC) for the sending domain.</p>
+  </div>
+</section>
+
+<!-- THE COMPLEXITY: ENROLLMENT CHAIN -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">04b — Spotlight: The Enrollment Chain</div>
+    <h2>From "yes" to login — fully automated</h2>
+    <p>The enrollment sequence is where most coaching businesses still rely on manual back-and-forth. The goal here was zero manual touchpoints between a client saying yes and receiving their first email inside the program.</p>
+
+    <div class="flow-chain">
+      <div class="flow-row"><span class="flow-stage">Trigger</span><p class="flow-desc">Business owner marks contact as YES in the CRM Opportunities pipeline</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 1</span><p class="flow-desc">Automated email sent to client with payment link and plan options (one-time or 3-pay)</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 2</span><p class="flow-desc">Payment confirmed — coaching agreement (proposal) sent via GHL for digital signature</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 3</span><p class="flow-desc">Signature confirmed — GHL membership account created and login credentials generated</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 4</span><p class="flow-desc">Login details email sent with portal link and access instructions</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 5</span><p class="flow-desc">Onboarding info email sent 1 minute after login delivery</p></div>
+      <div class="flow-row"><span class="flow-stage">Step 6</span><p class="flow-desc">Client enters onboarding sequence — weekly check-ins, intake form, and program orientation</p></div>
+    </div>
+
+    <p>Re-entry prevention was applied at each stage of the enrollment chain to prevent clients from receiving duplicate contracts, login emails, or onboarding sequences if they re-submitted a form or triggered a workflow more than once — a common issue in GHL builds that goes unaddressed until something breaks.</p>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">05 — Results</div>
+    <h2>A complete operating system for a coaching practice</h2>
+    <div class="results-grid">
+      <div class="result-card featured">
+        <div class="result-val">14</div>
+        <span class="result-lbl">Workflows built</span>
+        <p class="result-note">Covering every stage of the client journey from first form submission to alumni follow-up.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">15+</div>
+        <span class="result-lbl">Email sequences</span>
+        <p class="result-note">Every touchpoint written and automated — nurture, reminders, onboarding, re-engagement, and alumni.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">10</div>
+        <span class="result-lbl">Forms built</span>
+        <p class="result-note">Contact, intake, quiz, pre-qualification, check-in, testimonial, wellness assessment, and more.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">4-path</div>
+        <span class="result-lbl">Post-call routing</span>
+        <p class="result-note">Yes, Maybe, Not Yet, and Not a Fit — each with its own automated sequence and CRM tagging logic.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">0</div>
+        <span class="result-lbl">Manual enrollment steps</span>
+        <p class="result-note">Contract to login delivery is fully automated. The owner sets a pipeline stage — the system handles the rest.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">12</div>
+        <span class="result-lbl">Training videos delivered</span>
+        <p class="result-note">Step-by-step recordings for every routine task. The client runs the system independently without needing ongoing support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<div class="diff-section">
+  <div class="diff-inner">
+    <div>
+      <span class="diff-sub">The Approach</span>
+      <div class="diff-heading">A system that works the same way whether you're watching it or not.</div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.75;">Here's what I do differently — and why it matters long after the build is done.</p>
+    </div>
+    <div class="diff-points">
+      <div class="diff-point">
+        <span class="diff-icon">01</span>
+        <div class="diff-text">
+          <h3>Map the full journey before building anything</h3>
+          <p>Most automation problems are actually architecture problems. Building before mapping creates gaps, double-triggers, and edge cases that only surface under live traffic. Every engagement starts with a flowchart, not a workflow.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">02</span>
+        <div class="diff-text">
+          <h3>Build for edge cases, not just the happy path</h3>
+          <p>Re-entry prevention, duplicate email handling, conditional testimonial follow-ups, coupon logic across different payment plans — the things that matter most are the ones most builds ignore until something breaks with a real client.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">03</span>
+        <div class="diff-text">
+          <h3>Hand over a system the client can actually run</h3>
+          <p>Documentation and training aren't an afterthought. Every engagement ends with the client able to manage their own system. If they need to call me to send a newsletter or add someone to a course, the handoff failed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">06 — Tools &amp; Platforms</div>
+    <h2>Platforms involved in this project</h2>
+    <div class="tools-wrap">
+      <span class="tool-tag">GoHighLevel</span>
+      <span class="tool-tag">GHL Memberships</span>
+      <span class="tool-tag">GHL Proposals &amp; Contracts</span>
+      <span class="tool-tag">GHL Calendar</span>
+      <span class="tool-tag">GHL Pipeline</span>
+      <span class="tool-tag">Canva</span>
+      <span class="tool-tag">SPF / DKIM / DMARC</span>
+      <span class="tool-tag">Lucidchart</span>
+    </div>
+    <div class="callout" style="margin-top:36px;">
+      <p>"Good automation is invisible. The client shouldn't have to think about it — it should just work, every time, for every lead."</p>
+    </div>
+    <p style="margin-top:16px;font-size:13px;">
+      <a href="https://yourtechunicorn.com/portfolio/">← Back to Portfolio</a> &nbsp;·&nbsp;
+      <a href="https://yourtechunicorn.com/case-study/">See the Platform Migration case study →</a>
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-heading">Need a client journey that runs itself?</div>
+  <p class="cta-sub">Let's map out what a full system build would look like for your business.</p>
+  <a href="https://yourtechunicorn.com/contact/" class="btn-primary">Book a Discovery Call</a>
+  <a href="https://yourtechunicorn.com/portfolio/" class="btn-ghost">View More Work</a>
+</section>
+
+<footer>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems &amp; Automation</span>
+    </div>
+  </a>
+  <span class="footer-copy">© 2026 Hey Miss Adventures LLC · yourtechunicorn.com</span>
+  <ul class="footer-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+    <li><a href="https://yourtechunicorn.com/contact/">Contact</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

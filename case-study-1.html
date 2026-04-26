@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Full Platform Migration to GoHighLevel — Your Tech Unicorn</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,300&family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B2A;--navy-mid:#1a2d42;--violet:#2D1B69;
+  --amber:#F5A623;--amber-dim:rgba(245,166,35,.12);--amber-border:rgba(245,166,35,.28);
+  --coral:#FF6B6B;--white:#fff;--off-white:#F8F9FA;
+  --text-primary:#f0f0f0;--text-secondary:#8a96a3;--text-muted:#4a5568;
+  --border:rgba(255,255,255,.07);--bg:#080d12;--surface:#0f1c2a;--surface-2:#152336;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+p{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:16px;}
+p:last-child{margin-bottom:0;}
+h2{font-weight:700;font-size:26px;letter-spacing:-.02em;color:var(--white);margin-bottom:16px;line-height:1.2;}
+h3{font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(8,13,18,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 64px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-badge{background:var(--amber);color:var(--navy);font-family:'DM Sans',sans-serif;font-weight:900;font-size:16px;letter-spacing:-.02em;padding:5px 9px;line-height:1;}
+.nav-text{display:flex;flex-direction:column;gap:1px;}
+.nav-name{font-size:13px;letter-spacing:.03em;color:var(--white);}
+.nav-descriptor{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);text-decoration:none;}
+.nav-cta{background:transparent;border:1px solid var(--amber-border);color:var(--amber);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;cursor:pointer;transition:background .2s;text-decoration:none;}
+.nav-cta:hover{background:var(--amber-dim);text-decoration:none;}
+
+.hero{padding:80px 64px 64px;border-bottom:1px solid var(--border);}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.eyebrow-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border);padding:5px 12px;}
+.eyebrow-div{height:1px;width:40px;background:var(--amber-border);}
+.eyebrow-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);}
+.hero h1{font-weight:900;font-size:clamp(32px,5vw,60px);letter-spacing:-.03em;line-height:1.05;color:var(--white);max-width:780px;margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--amber);}
+.hero-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:19px;color:var(--text-secondary);max-width:540px;line-height:1.5;margin-bottom:44px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);max-width:800px;}
+.stat-block{background:var(--surface);padding:24px 20px;}
+.stat-num{font-weight:900;font-size:28px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:5px;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);}
+
+.section{padding:72px 64px;border-bottom:1px solid var(--border);}
+.section-inner{max-width:900px;margin:0 auto;}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:32px;display:flex;align-items:center;gap:14px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:160px;}
+
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.overview-row{background:var(--surface);padding:16px 22px;display:flex;gap:18px;align-items:flex-start;}
+.ov-key{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);min-width:110px;padding-top:2px;}
+.ov-val{font-size:14px;color:var(--text-primary);line-height:1.5;}
+
+.platform-stack{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin:28px 0;}
+.platform-row{background:var(--surface);padding:14px 22px;display:flex;align-items:center;gap:18px;}
+.platform-name{font-weight:700;font-size:14px;color:var(--white);min-width:200px;}
+.platform-role{font-size:13px;color:var(--text-secondary);margin:0;flex:1;}
+
+.migration-arrow{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--amber-dim);border:1px solid var(--amber-border);margin:20px 0;flex-wrap:wrap;gap:10px;}
+.arr-from{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--text-secondary);}
+.arr-sym{font-size:18px;color:var(--amber);font-weight:900;}
+.arr-to{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--amber);font-weight:500;}
+
+.steps{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.step{background:var(--surface);padding:24px 28px;display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:start;transition:background .2s;}
+.step:hover{background:var(--surface-2);}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--amber);padding-top:2px;}
+.step-content h3{margin-bottom:6px;}
+.step-content p{font-size:14px;margin:0;}
+
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.area-card{background:var(--surface);padding:28px;position:relative;}
+.area-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber-border);}
+.area-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--text-muted);margin-bottom:14px;display:block;}
+.area-items{list-style:none;margin-top:10px;}
+.area-items li{font-size:13px;color:var(--text-secondary);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.45;}
+.area-items li:last-child{border-bottom:none;}
+.area-items li::before{content:'→';color:var(--amber);font-size:11px;margin-top:1px;flex-shrink:0;font-family:'DM Mono',monospace;}
+
+/* SCREENSHOT DISPLAY */
+.screenshot-wrap{margin:24px 0;border:1px solid var(--border);background:var(--surface);overflow:hidden;}
+.screenshot-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface-2);}
+.screenshot-img{width:100%;display:block;object-fit:contain;}
+
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.result-card{background:var(--surface);padding:28px 24px;}
+.result-card.featured{background:var(--navy);}
+.result-val{font-weight:900;font-size:36px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:6px;}
+.result-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;display:block;}
+.result-note{font-size:13px;color:var(--text-secondary);margin:0;line-height:1.5;}
+
+.tools-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px;}
+.tool-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);padding:5px 12px;}
+
+.callout{background:var(--surface);border-left:3px solid var(--amber);padding:22px 26px;margin:20px 0;}
+.callout p{font-family:'DM Serif Display',serif;font-style:italic;font-size:17px;color:var(--text-primary);margin:0;line-height:1.6;}
+
+.diff-section{background:var(--navy);padding:72px 64px;border-bottom:1px solid var(--border);}
+.diff-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start;}
+.diff-heading{font-family:'DM Serif Display',serif;font-style:italic;font-size:32px;color:var(--white);line-height:1.2;margin-bottom:12px;}
+.diff-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:block;}
+.diff-points{display:flex;flex-direction:column;gap:16px;}
+.diff-point{display:flex;gap:18px;padding:18px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+.diff-icon{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);min-width:22px;padding-top:2px;}
+.diff-text h3{color:var(--off-white);margin-bottom:5px;font-size:14px;}
+.diff-text p{font-size:13px;margin:0;line-height:1.65;}
+
+.cta-section{padding:80px 64px;text-align:center;border-top:1px solid var(--border);}
+.cta-heading{font-weight:900;font-size:clamp(26px,4vw,42px);letter-spacing:-.03em;color:var(--white);margin-bottom:10px;}
+.cta-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;color:var(--text-secondary);margin-bottom:36px;}
+.btn-primary{background:var(--amber);color:var(--navy);font-weight:700;font-size:14px;padding:13px 34px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s;}
+.btn-primary:hover{opacity:.9;text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--text-secondary);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border:1px solid var(--border);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;margin-left:10px;}
+.btn-ghost:hover{border-color:var(--amber-border);color:var(--amber);text-decoration:none;}
+
+footer{background:var(--surface);padding:26px 64px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-muted);}
+.footer-links{display:flex;gap:26px;list-style:none;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:color .2s;}
+.footer-links a:hover{color:var(--amber);text-decoration:none;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;} .nav-links{display:none;}
+  .hero,.section,.diff-section,.cta-section{padding-left:20px;padding-right:20px;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .overview-grid,.areas,.results-grid{grid-template-columns:1fr;}
+  .diff-inner{grid-template-columns:1fr;gap:36px;}
+  footer{padding:20px;flex-direction:column;gap:14px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems & Automation</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/case-study/" class="active">Case Study</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+  </ul>
+  <a href="https://yourtechunicorn.com/contact/" class="nav-cta">Book a Call</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-tag">Case Study</span>
+    <div class="eyebrow-div"></div>
+    <span class="eyebrow-lbl">Platform Migration · Revenue Systems · GoHighLevel</span>
+  </div>
+  <h1>Full Platform Migration<br>to <em>GoHighLevel</em></h1>
+  <p class="hero-sub">Six platforms consolidated into one — without losing a single customer, automation, or workflow in the process.</p>
+  <div class="hero-stats">
+    <div class="stat-block"><div class="stat-num">30K+</div><div class="stat-lbl">Contacts Migrated</div></div>
+    <div class="stat-block"><div class="stat-num">36%</div><div class="stat-lbl">Email Open Rate</div></div>
+    <div class="stat-block"><div class="stat-num">$998→$97</div><div class="stat-lbl">Monthly Platform Cost</div></div>
+    <div class="stat-block"><div class="stat-num">0</div><div class="stat-lbl">Data Loss or Login Issues</div></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">01 — Project Overview</div>
+    <div class="overview-grid">
+      <div class="overview-row"><span class="ov-key">Client</span><span class="ov-val">Digital courses and lead generation business — Health &amp; Wellness</span></div>
+      <div class="overview-row"><span class="ov-key">My Role</span><span class="ov-val">Lead Tech &amp; Implementation Specialist — agency engagement</span></div>
+      <div class="overview-row"><span class="ov-key">Timeline</span><span class="ov-val">2 months (active migration phase)</span></div>
+      <div class="overview-row"><span class="ov-key">Migrating From</span><span class="ov-val">MemberVault · Keap (Infusionsoft) · Leadpages · WordPress · Squarespace · Stripe · Samcart</span></div>
+      <div class="overview-row"><span class="ov-key">Destination</span><span class="ov-val">GoHighLevel — consolidated single platform</span></div>
+      <div class="overview-row"><span class="ov-key">Scope</span><span class="ov-val">CRM + contacts · Email &amp; automations · 5 courses (5 modules each) · Funnels &amp; checkout · Custom quiz rebuild</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">02 — The Challenge</div>
+    <h2>A business running on six platforms simultaneously</h2>
+    <p>By the time this engagement started, the client had built their business across a fragmented stack that had grown organically over years. Every tool solved one problem but created new ones.</p>
+    <div class="platform-stack">
+      <div class="platform-row"><span class="platform-name">MemberVault</span><p class="platform-role">Course delivery and digital product hosting</p></div>
+      <div class="platform-row"><span class="platform-name">Keap (Infusionsoft)</span><p class="platform-role">CRM, contact records, automations, and all email</p></div>
+      <div class="platform-row"><span class="platform-name">Leadpages</span><p class="platform-role">Opt-in pages, landing pages, and sales pages</p></div>
+      <div class="platform-row"><span class="platform-name">Squarespace</span><p class="platform-role">Separate membership site and content delivery area</p></div>
+      <div class="platform-row"><span class="platform-name">WordPress (multiple)</span><p class="platform-role">Podcast site, program websites, and Thrive Quiz weighted assessment</p></div>
+      <div class="platform-row"><span class="platform-name">Multiple Payment Processors</span><p class="platform-role">Stripe direct + Samcart — no unified checkout</p></div>
+    </div>
+    <p>The result: high monthly software costs, siloed customer data, inconsistent user experience, and limited automation and reporting capability. The goal was to consolidate everything into GoHighLevel — without disrupting a single live customer.</p>
+    <div class="migration-arrow">
+      <span class="arr-from">MemberVault + Keap + Leadpages + WordPress + Squarespace + Stripe</span>
+      <span class="arr-sym">→</span>
+      <span class="arr-to">GoHighLevel</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">03 — Migration Process</div>
+    <h2>A structured approach, before a single file moves</h2>
+    <p>Every migration I run follows the same six-phase process. Most migrations fail not during execution — but because of what wasn't planned before it started.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>System Inventory</h3>
+          <p>Full audit of every existing asset: all contacts and tags, automations and email sequences, funnels and pages, courses and products, payment integrations, and domain configurations. Nothing gets migrated until it is documented and mapped.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>Migration Plan &amp; Sequencing</h3>
+          <p>A phased migration sequence designed to protect live customers throughout. High-risk items — active automations, enrolled students, payment flows — are migrated last, after everything downstream has been rebuilt and tested.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>Build &amp; Rebuild Inside GHL</h3>
+          <p>Each component is rebuilt using GHL's native logic — not just copied over. Where original workflows were messy or brittle, they were simplified and improved before migration. A direct copy carries all the original problems with it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>QA &amp; End-to-End Testing</h3>
+          <p>Every funnel, automation, and access flow tested before cutover: test purchases, enrollment confirmations, automation trigger checks, and deliverability verification. Each component signed off before moving to the next phase.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <h3>Cutover &amp; Stabilization</h3>
+          <p>Domain transfers, DNS updates, and final contact imports staged to minimize disruption. Available post-launch to resolve edge cases quickly — the period immediately after cutover is when issues surface.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">06</span>
+        <div class="step-content">
+          <h3>Documentation Handover</h3>
+          <p>Full documentation delivered to the client: what was migrated, how the system is structured, what each automation does, and how to manage it going forward. The work should be maintainable after I leave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">04 — Scope of Migration</div>
+    <h2>Every component, documented and rebuilt</h2>
+    <p>This project touched every layer of the client's digital business infrastructure.</p>
+    <div class="areas">
+
+      <div class="area-card">
+        <span class="area-num">Area 01</span>
+        <h3>CRM &amp; Contact Data</h3>
+        <ul class="area-items">
+          <li>30,000+ contacts migrated from Keap to GHL</li>
+          <li>All tags, custom fields, and segmentation logic recreated and cleaned up</li>
+          <li>Contact history and lifecycle stages mapped to GHL pipelines</li>
+          <li>Dedicated sending domain set up and warmed over 8 weeks</li>
+        </ul>
+        <div class="screenshot-wrap" style="margin-top:20px;">
+          <div class="screenshot-label">Email deliverability warmup — new sending domain ramp</div>
+          <img class="screenshot-img" src="https://yourtechunicorn.com/wp-content/uploads/2025/06/warmup-1024x328.png" alt="Email warmup ramp screenshot" loading="lazy">
+        </div>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 02</span>
+        <h3>Email Sequences &amp; Automations</h3>
+        <ul class="area-items">
+          <li>All email sequences, triggers, and lifecycle automations rebuilt in GHL</li>
+          <li>Overly complex Keap workflows simplified before migration</li>
+          <li>Automations reconnected to correct triggers, tags, and list segments</li>
+          <li>36% email open rate achieved with new sending domain</li>
+        </ul>
+      </div>
+
+      <div class="area-card" style="grid-column:1/-1;">
+        <span class="area-num">Area 03</span>
+        <h3>Custom Weighted Quiz (WordPress → GHL)</h3>
+        <ul class="area-items">
+          <li>Rebuilt complex assessment previously hosted on WordPress via Thrive Quiz</li>
+          <li>35 questions · 12 result archetypes · 5-point grading per question</li>
+          <li>11 coordinated GHL workflows to handle scoring, computation, and result routing</li>
+          <li>Each result connected to a segmented email nurture sequence in GHL</li>
+        </ul>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:20px;">
+          <div class="screenshot-wrap" style="margin:0;">
+            <div class="screenshot-label">Quiz workflow architecture inside GHL</div>
+            <img class="screenshot-img" src="https://yourtechunicorn.com/wp-content/uploads/2025/06/Screenshot_2.png" alt="GHL quiz workflows screenshot" loading="lazy">
+          </div>
+          <div class="screenshot-wrap" style="margin:0;">
+            <div class="screenshot-label">Archetype-based nurture automation sequences</div>
+            <img class="screenshot-img" src="https://yourtechunicorn.com/wp-content/uploads/2025/06/archetype-nurture-1024x322.png" alt="Archetype nurture workflow screenshot" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 04</span>
+        <h3>Courses &amp; Membership Areas</h3>
+        <ul class="area-items">
+          <li>5 courses (5 modules each) rebuilt inside GHL</li>
+          <li>Custom onboarding sequences and drip schedules recreated</li>
+          <li>Access levels and user roles mapped from MemberVault into GHL</li>
+          <li>Zero login issues or data loss post-migration</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 05</span>
+        <h3>Funnels, Sales Pages &amp; Checkout</h3>
+        <ul class="area-items">
+          <li>All lead magnet funnels and sales pages rebuilt from Leadpages</li>
+          <li>Checkout flows rebuilt with upsells, downsells, and order bumps</li>
+          <li>Payment gateways connected with confirmation pages and email receipts</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <span class="area-num">Area 06</span>
+        <h3>Domains &amp; Email Deliverability</h3>
+        <ul class="area-items">
+          <li>SPF, DKIM, and DMARC records configured for the new sending domain</li>
+          <li>8-week deliverability warmup strategy executed</li>
+          <li>Automated list hygiene flows to maintain ongoing list health</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">05 — Results</div>
+    <h2>What the migration delivered</h2>
+    <div class="results-grid">
+      <div class="result-card featured">
+        <div class="result-val">$901</div>
+        <span class="result-lbl">Monthly savings</span>
+        <p class="result-note">Platform costs reduced from $998 to $97/month — 90% reduction in software spend.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">36%</div>
+        <span class="result-lbl">Email open rate</span>
+        <p class="result-note">Achieved across all published workflows using the new warmed sending domain.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">30K+</div>
+        <span class="result-lbl">Contacts migrated</span>
+        <p class="result-note">Full database moved from Keap with tags, fields, and segmentation intact.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">0</div>
+        <span class="result-lbl">Student access issues</span>
+        <p class="result-note">Every enrolled student retained correct course access post-migration.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">11</div>
+        <span class="result-lbl">Quiz workflows built</span>
+        <p class="result-note">Coordinated automations to recreate a 35-question weighted assessment inside GHL.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">6→1</div>
+        <span class="result-lbl">Platforms consolidated</span>
+        <p class="result-note">Six separate tools replaced by a single unified system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<div class="diff-section">
+  <div class="diff-inner">
+    <div>
+      <span class="diff-sub">The Approach</span>
+      <div class="diff-heading">Most migrations just move the mess to a new address.</div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.75;">Here's what I do differently — and why it matters for the business after I'm gone.</p>
+    </div>
+    <div class="diff-points">
+      <div class="diff-point">
+        <span class="diff-icon">01</span>
+        <div class="diff-text">
+          <h3>Rebuild with the destination platform in mind</h3>
+          <p>Forcing Keap's patterns into GHL creates brittle automations. Every workflow was rebuilt using GHL's native logic — cleaner, faster, and maintainable by the client's own team.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">02</span>
+        <div class="diff-text">
+          <h3>Simplify before you migrate</h3>
+          <p>If a workflow had logic conflicts in the old system, those problems get fixed before migration — not carried over and left for later.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">03</span>
+        <div class="diff-text">
+          <h3>Document what you built</h3>
+          <p>Every migration ends with full system documentation: what was migrated, how it's structured, what each automation does. The client shouldn't need to call me to understand their own system.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">06 — Tools &amp; Platforms</div>
+    <h2>Platforms involved in this project</h2>
+    <div class="tools-wrap">
+      <span class="tool-tag">GoHighLevel</span><span class="tool-tag">Keap / Infusionsoft</span><span class="tool-tag">MemberVault</span><span class="tool-tag">Leadpages</span><span class="tool-tag">WordPress</span><span class="tool-tag">Thrive Quiz</span><span class="tool-tag">Squarespace</span><span class="tool-tag">Stripe</span><span class="tool-tag">Samcart</span><span class="tool-tag">Zapier</span><span class="tool-tag">Looker Studio</span><span class="tool-tag">Lucidchart</span>
+    </div>
+    <div class="callout" style="margin-top:36px;">
+      <p>"Clean data, tested automations, and a system the client can actually maintain — that's what a migration should deliver."</p>
+    </div>
+    <p style="margin-top:16px;font-size:13px;">
+      <a href="https://yourtechunicorn.com/portfolio/">← Back to Portfolio</a> &nbsp;·&nbsp;
+      <a href="https://yourtechunicorn.com/portfolio/">See what clients say →</a>
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-heading">Planning a platform migration?</div>
+  <p class="cta-sub">Let's talk through your current setup and what a clean migration would look like for your business.</p>
+  <a href="https://yourtechunicorn.com/contact/" class="btn-primary">Book a Discovery Call</a>
+  <a href="https://yourtechunicorn.com/portfolio/" class="btn-ghost">View More Work</a>
+</section>
+
+<footer>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems & Automation</span>
+    </div>
+  </a>
+  <span class="footer-copy">© 2026 Hey Miss Adventures LLC · yourtechunicorn.com</span>
+  <ul class="footer-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+    <li><a href="https://yourtechunicorn.com/contact/">Contact</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

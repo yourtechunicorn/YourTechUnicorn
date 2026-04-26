@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Content Operations & Product Launch — Your Tech Unicorn</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,300&family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B2A;--navy-mid:#1a2d42;--violet:#2D1B69;
+  --amber:#F5A623;--amber-dim:rgba(245,166,35,.12);--amber-border:rgba(245,166,35,.28);
+  --coral:#FF6B6B;--white:#fff;--off-white:#F8F9FA;
+  --text-primary:#f0f0f0;--text-secondary:#8a96a3;--text-muted:#4a5568;
+  --border:rgba(255,255,255,.07);--bg:#080d12;--surface:#0f1c2a;--surface-2:#152336;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text-primary);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+p{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:16px;}
+p:last-child{margin-bottom:0;}
+h2{font-weight:700;font-size:26px;letter-spacing:-.02em;color:var(--white);margin-bottom:16px;line-height:1.2;}
+h3{font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(8,13,18,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 64px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-badge{background:var(--amber);color:var(--navy);font-family:'DM Sans',sans-serif;font-weight:900;font-size:16px;letter-spacing:-.02em;padding:5px 9px;line-height:1;}
+.nav-text{display:flex;flex-direction:column;gap:1px;}
+.nav-name{font-size:13px;letter-spacing:.03em;color:var(--white);}
+.nav-descriptor{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);text-decoration:none;}
+.nav-cta{background:transparent;border:1px solid var(--amber-border);color:var(--amber);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;cursor:pointer;transition:background .2s;text-decoration:none;}
+.nav-cta:hover{background:var(--amber-dim);text-decoration:none;}
+
+.hero{padding:80px 64px 64px;border-bottom:1px solid var(--border);}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.eyebrow-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border);padding:5px 12px;}
+.eyebrow-div{height:1px;width:40px;background:var(--amber-border);}
+.eyebrow-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);}
+.hero h1{font-weight:900;font-size:clamp(32px,5vw,60px);letter-spacing:-.03em;line-height:1.05;color:var(--white);max-width:780px;margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--amber);}
+.hero-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:19px;color:var(--text-secondary);max-width:540px;line-height:1.5;margin-bottom:44px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);max-width:800px;}
+.stat-block{background:var(--surface);padding:24px 20px;}
+.stat-num{font-weight:900;font-size:28px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:5px;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);}
+
+.section{padding:72px 64px;border-bottom:1px solid var(--border);}
+.section-inner{max-width:900px;margin:0 auto;}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:32px;display:flex;align-items:center;gap:14px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:160px;}
+
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.overview-row{background:var(--surface);padding:16px 22px;display:flex;gap:18px;align-items:flex-start;}
+.ov-key{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);min-width:110px;padding-top:2px;}
+.ov-val{font-size:14px;color:var(--text-primary);line-height:1.5;}
+
+.platform-stack{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin:28px 0;}
+.platform-row{background:var(--surface);padding:14px 22px;display:flex;align-items:center;gap:18px;}
+.platform-name{font-weight:700;font-size:14px;color:var(--white);min-width:200px;}
+.platform-role{font-size:13px;color:var(--text-secondary);margin:0;flex:1;}
+
+.migration-arrow{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--amber-dim);border:1px solid var(--amber-border);margin:20px 0;flex-wrap:wrap;gap:10px;}
+.arr-from{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--text-secondary);}
+.arr-sym{font-size:18px;color:var(--amber);font-weight:900;}
+.arr-to{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--amber);font-weight:500;}
+
+.steps{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.step{background:var(--surface);padding:24px 28px;display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:start;transition:background .2s;}
+.step:hover{background:var(--surface-2);}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--amber);padding-top:2px;}
+.step-content h3{margin-bottom:6px;}
+.step-content p{font-size:14px;margin:0;}
+
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.area-card{background:var(--surface);padding:28px;position:relative;}
+.area-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber-border);}
+.area-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--text-muted);margin-bottom:14px;display:block;}
+.area-items{list-style:none;margin-top:10px;}
+.area-items li{font-size:13px;color:var(--text-secondary);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.45;}
+.area-items li:last-child{border-bottom:none;}
+.area-items li::before{content:'→';color:var(--amber);font-size:11px;margin-top:1px;flex-shrink:0;font-family:'DM Mono',monospace;}
+
+.phase-timeline{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.phase-row{background:var(--surface);padding:20px 28px;display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:start;transition:background .2s;}
+.phase-row:hover{background:var(--surface-2);}
+.phase-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);padding-top:2px;}
+.phase-content h3{margin-bottom:4px;font-size:14px;}
+.phase-content p{font-size:13px;margin:0;line-height:1.6;}
+
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px;}
+.result-card{background:var(--surface);padding:28px 24px;}
+.result-card.featured{background:var(--navy);}
+.result-val{font-weight:900;font-size:36px;letter-spacing:-.03em;color:var(--amber);line-height:1;margin-bottom:6px;}
+.result-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;display:block;}
+.result-note{font-size:13px;color:var(--text-secondary);margin:0;line-height:1.5;}
+
+.tools-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px;}
+.tool-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);padding:5px 12px;}
+
+.callout{background:var(--surface);border-left:3px solid var(--amber);padding:22px 26px;margin:20px 0;}
+.callout p{font-family:'DM Serif Display',serif;font-style:italic;font-size:17px;color:var(--text-primary);margin:0;line-height:1.6;}
+
+.diff-section{background:var(--navy);padding:72px 64px;border-bottom:1px solid var(--border);}
+.diff-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start;}
+.diff-heading{font-family:'DM Serif Display',serif;font-style:italic;font-size:32px;color:var(--white);line-height:1.2;margin-bottom:12px;}
+.diff-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:block;}
+.diff-points{display:flex;flex-direction:column;gap:16px;}
+.diff-point{display:flex;gap:18px;padding:18px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+.diff-icon{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);min-width:22px;padding-top:2px;}
+.diff-text h3{color:var(--off-white);margin-bottom:5px;font-size:14px;}
+.diff-text p{font-size:13px;margin:0;line-height:1.65;}
+
+.cta-section{padding:80px 64px;text-align:center;border-top:1px solid var(--border);}
+.cta-heading{font-weight:900;font-size:clamp(26px,4vw,42px);letter-spacing:-.03em;color:var(--white);margin-bottom:10px;}
+.cta-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;color:var(--text-secondary);margin-bottom:36px;}
+.btn-primary{background:var(--amber);color:var(--navy);font-weight:700;font-size:14px;padding:13px 34px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s;}
+.btn-primary:hover{opacity:.9;text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--text-secondary);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border:1px solid var(--border);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;margin-left:10px;}
+.btn-ghost:hover{border-color:var(--amber-border);color:var(--amber);text-decoration:none;}
+
+footer{background:var(--surface);padding:26px 64px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--text-muted);}
+.footer-links{display:flex;gap:26px;list-style:none;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:color .2s;}
+.footer-links a:hover{color:var(--amber);text-decoration:none;}
+
+/* PLACEHOLDER STYLE for fill-in items */
+.fill-in{background:rgba(245,166,35,.08);border:1px dashed var(--amber-border);color:var(--amber);font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;letter-spacing:.05em;display:inline-block;border-radius:2px;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;} .nav-links{display:none;}
+  .hero,.section,.diff-section,.cta-section{padding-left:20px;padding-right:20px;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .overview-grid,.areas,.results-grid{grid-template-columns:1fr;}
+  .diff-inner{grid-template-columns:1fr;gap:36px;}
+  .phase-row{grid-template-columns:1fr;}
+  footer{padding:20px;flex-direction:column;gap:14px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems & Automation</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/case-study/" class="active">Case Study</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+  </ul>
+  <a href="https://yourtechunicorn.com/contact/" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-tag">Case Study</span>
+    <div class="eyebrow-div"></div>
+    <span class="eyebrow-lbl">Project Management · Content Operations · Digital Product Launch</span>
+  </div>
+  <h1>Content Operations &amp;<br><em>Digital Product Launch</em></h1>
+  <p class="hero-sub">Six months of project managing a parenting content brand — platform migration, a full course launch, and content systems built from scratch.</p>
+  <div class="hero-stats">
+    <div class="stat-block"><div class="stat-num">35K+</div><div class="stat-lbl">Email Subscribers Managed</div></div>
+    <div class="stat-block"><div class="stat-num">3</div><div class="stat-lbl">New Lead Magnets Launched</div></div>
+    <div class="stat-block"><div class="stat-num">9</div><div class="stat-lbl">Course Modules Coordinated</div></div>
+    <div class="stat-block"><div class="stat-num">4</div><div class="stat-lbl">Team Members Managed</div></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">01 — Project Overview</div>
+    <div class="overview-grid">
+      <div class="overview-row"><span class="ov-key">Client</span><span class="ov-val">Parenting content brand — Health &amp; Wellness / Parenting education</span></div>
+      <div class="overview-row"><span class="ov-key">My Role</span><span class="ov-val">Technical Project Manager &amp; Systems Lead — freelance engagement</span></div>
+      <div class="overview-row"><span class="ov-key">Timeline</span><span class="ov-val">6 months (March 2024 – August 2024)</span></div>
+      <div class="overview-row"><span class="ov-key">Platforms</span><span class="ov-val">ClickFunnels → MyCX (GHL) · ConvertKit · Zapier · Canva · ClickUp</span></div>
+      <div class="overview-row"><span class="ov-key">Team Managed</span><span class="ov-val">Client · Copywriter · Graphic Designer · Video Editor</span></div>
+      <div class="overview-row"><span class="ov-key">Scope</span><span class="ov-val">Platform migration · Email list management · Lead magnet builds · Weekly content ops · Full course launch</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">02 — The Challenge</div>
+    <h2>A growing business with no operational backbone</h2>
+    <p>The client had built real traction — a 35,000+ subscriber email list, a Facebook community of 56,000 members, and an existing catalog of digital products — but the infrastructure running it all was fragmented and unmaintainable.</p>
+    <div class="platform-stack">
+      <div class="platform-row"><span class="platform-name">ClickFunnels</span><p class="platform-role">Sales funnels and course content delivery — aging and expensive relative to what it provided</p></div>
+      <div class="platform-row"><span class="platform-name">ConvertKit</span><p class="platform-role">Email marketing with 35K+ subscribers — disorganized tags, cold segments, and no active cleanup strategy</p></div>
+      <div class="platform-row"><span class="platform-name">WordPress</span><p class="platform-role">Main website — separate from funnels, creating fragmented customer journeys</p></div>
+      <div class="platform-row"><span class="platform-name">Canva / GDrive</span><p class="platform-role">Assets scattered without a centralized content system or publishing workflow</p></div>
+      <div class="platform-row"><span class="platform-name">No PM system</span><p class="platform-role">No structured project management — timelines, assignments, and approvals managed ad hoc</p></div>
+    </div>
+    <p>On top of stabilizing operations, the client had an ambitious goal: launch a brand-new 9-module course within the same 6-month window, while also standing up a sustainable weekly content engine for newsletters, blogs, and social media.</p>
+    <div class="migration-arrow">
+      <span class="arr-from">ClickFunnels + fragmented ops + no content system</span>
+      <span class="arr-sym">→</span>
+      <span class="arr-to">MyCX + structured team + weekly content cadence + full course launch</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">03 — How I Structured It</div>
+    <h2>Eight phases, running in parallel</h2>
+    <p>This engagement required running platform migration, content operations, and launch preparation simultaneously — without dropping any live customer-facing systems in the process. Here's how I sequenced it.</p>
+    <div class="phase-timeline">
+      <div class="phase-row">
+        <span class="phase-tag">Phase 0</span>
+        <div class="phase-content">
+          <h3>Onboarding &amp; Discovery</h3>
+          <p>Full audit of existing tech stack, email list health, offer catalog, and content assets. Built the project tracker in ClickUp, established folder structures in Google Drive, and onboarded all team members with access and role clarity before any build work began.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 1</span>
+        <div class="phase-content">
+          <h3>Platform Migration (ClickFunnels → MyCX)</h3>
+          <p>Migrated all funnels, course content, and product pages from ClickFunnels to MyCX — a GoHighLevel-based platform. Rebuilt automations, reconnected payment gateways, set up product fulfillment, and configured domains. Maintained zero disruption to existing students and customers throughout.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 2</span>
+        <div class="phase-content">
+          <h3>Email System Audit &amp; Re-engagement</h3>
+          <p>Audited the ConvertKit account — reviewed 50+ tags, identified 1,700+ cold subscribers for a re-engagement sequence, and restructured segmentation logic. Set up a new nurture sequence to run alongside the re-engagement campaign for newly warm contacts.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 3</span>
+        <div class="phase-content">
+          <h3>Content Systems &amp; Calendar</h3>
+          <p>Established a repeatable weekly content system: newsletter (monthly themes, recurring format), blog (2x per month, topic-mapped to the upcoming course), and social media (2–3x per week across Facebook and Instagram). Built the content calendar and assigned ownership to the graphic designer and copywriter.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 4</span>
+        <div class="phase-content">
+          <h3>Lead Magnet Funnel Builds</h3>
+          <p>Built three new lead magnet funnels from scratch — an interactive quiz, a learning style assessment, and a resource ebook — each with landing pages, thank you pages, confirmation emails, and connecting ConvertKit automations. Also built the course waitlist funnel ahead of launch.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 5</span>
+        <div class="phase-content">
+          <h3>Course Build &amp; Launch Prep</h3>
+          <p>Managed the full build of the course inside MyCX — uploaded all content, configured drip schedules, and coordinated asset delivery (slides, workbooks, videos) across the graphic designer and video editor. Coordinated the copywriter on sales page, launch emails, abandoned cart sequences, and onboarding copy.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 6</span>
+        <div class="phase-content">
+          <h3>Launch Execution</h3>
+          <p>Executed the full launch sequence: pre-launch teaser emails to the list, waitlist promotion, cart open and close, and post-purchase onboarding. Scheduled and published social media content in coordination with the graphic designer throughout the launch window.</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="phase-tag">Phase 7</span>
+        <div class="phase-content">
+          <h3>Handoff &amp; Documentation</h3>
+          <p>Delivered full project documentation: what was migrated, how the content system works, automation logic, and team workflows. Left the client with a running operation rather than a dependency on me to keep things moving.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">04 — Scope of Work</div>
+    <h2>Everything that moved through this engagement</h2>
+    <div class="areas">
+      <div class="area-card">
+        <span class="area-num">Area 01</span>
+        <h3>Platform Migration</h3>
+        <ul class="area-items">
+          <li>Migrated all funnels and course products from ClickFunnels to MyCX (GHL)</li>
+          <li>Rebuilt automations using MyCX native logic rather than replicating old patterns</li>
+          <li>Reconnected payment gateways, domains, and product fulfillment</li>
+          <li>Maintained zero downtime for active students during cutover</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-num">Area 02</span>
+        <h3>Email &amp; List Management</h3>
+        <ul class="area-items">
+          <li>Audited 50+ ConvertKit tags and rebuilt segmentation structure</li>
+          <li>Identified and ran re-engagement campaigns for 1,700+ cold subscribers</li>
+          <li>Built new nurture sequence for re-engaged and incoming contacts</li>
+          <li>Managed all email scheduling and delivery for the 35K+ subscriber list</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-num">Area 03</span>
+        <h3>Content Operations</h3>
+        <ul class="area-items">
+          <li>Built content calendar covering newsletter, blog, and social media</li>
+          <li>Managed weekly newsletter production with monthly themes and recurring format</li>
+          <li>Coordinated blog publishing at 2x per month with SEO-aligned topics</li>
+          <li>Supervised Facebook and Instagram posting at 2–3x per week</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-num">Area 04</span>
+        <h3>Lead Magnet Funnels</h3>
+        <ul class="area-items">
+          <li>Built interactive quiz funnel: landing page, TY page, confirmation email, nurture sequence</li>
+          <li>Built learning style quiz funnel with unique result-based segmentation</li>
+          <li>Built resource ebook funnel connected to ConvertKit automations</li>
+          <li>Built course waitlist funnel with pre-launch email sequence</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-num">Area 05</span>
+        <h3>Course Launch</h3>
+        <ul class="area-items">
+          <li>9-module course built and uploaded in MyCX</li>
+          <li>Coordinated slides, workbooks, and video assets across three team members</li>
+          <li>Full sales funnel: sales page, checkout, order bump, OTO, confirmation</li>
+          <li>Launch email sequence: pre-launch teasers, cart open, cart close, abandoned cart</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-num">Area 06</span>
+        <h3>Team &amp; Project Coordination</h3>
+        <ul class="area-items">
+          <li>Managed 4-person team: client, copywriter, graphic designer, video editor</li>
+          <li>Ran weekly review cadence and maintained master task tracker in ClickUp</li>
+          <li>Centralized all assets and documentation in Google Drive</li>
+          <li>Managed approval workflows for all client-facing content before publishing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">05 — Results</div>
+    <h2>What this engagement delivered</h2>
+    <p>This project didn't have a single launch moment — it was a sustained operational build across six months. The outcomes were structural as much as they were numerical.</p>
+    <div class="results-grid">
+      <div class="result-card featured">
+        <div class="result-val">Zero</div>
+        <span class="result-lbl">Disruption to live customers</span>
+        <p class="result-note">Platform migration from ClickFunnels to MyCX completed with no downtime for existing students or customers.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">35K+</div>
+        <span class="result-lbl">Subscribers re-organized</span>
+        <p class="result-note">ConvertKit list audited, cold subscribers identified, re-engagement campaign deployed, and segmentation rebuilt.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">3</div>
+        <span class="result-lbl">Lead magnet funnels built</span>
+        <p class="result-note">All built from scratch: interactive quiz, learning style assessment, resource ebook — each with full automation.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">9</div>
+        <span class="result-lbl">Course modules coordinated</span>
+        <p class="result-note">Full 9-module course built in MyCX with slides, workbooks, and video assets coordinated across 3 team members.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val">Weekly</div>
+        <span class="result-lbl">Content cadence established</span>
+        <p class="result-note">Newsletter, blog, and social media moved from ad hoc to a reliable weekly publishing system with clear ownership.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-val"><span class="fill-in">ADD METRIC</span></div>
+        <span class="result-lbl">Course launch revenue</span>
+        <p class="result-note">Add launch results here if you regain access to the data, or leave as qualitative: "Full launch executed on schedule."</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:36px;">
+      <p>"This was one of those projects where the deliverable wasn't just a thing that got built — it was an operation that could keep running after I left."</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<div class="diff-section">
+  <div class="diff-inner">
+    <div>
+      <span class="diff-sub">The Approach</span>
+      <div class="diff-heading">Most projects fail in the handoff. This one was designed for it.</div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.75;">What I do differently when managing a complex, multi-track engagement.</p>
+    </div>
+    <div class="diff-points">
+      <div class="diff-point">
+        <span class="diff-icon">01</span>
+        <div class="diff-text">
+          <h3>Audit before you build</h3>
+          <p>Before any migration or build work started, I documented everything: the full platform stack, all email tags and segments, every existing offer and funnel URL. Nothing moves until it's mapped.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">02</span>
+        <div class="diff-text">
+          <h3>Run parallel tracks without dropping balls</h3>
+          <p>Migration, content ops, and launch prep were all running simultaneously. This required clear ownership, sequenced milestones, and a project tracker the entire team could work from — not just me.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <span class="diff-icon">03</span>
+        <div class="diff-text">
+          <h3>Build for the team, not just the delivery</h3>
+          <p>Every system I built was documented and explained. The content calendar, approval workflows, and asset folders were designed for a non-technical client to manage independently after the engagement ended.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">06 — Tools &amp; Platforms</div>
+    <h2>Platforms used across this engagement</h2>
+    <div class="tools-wrap">
+      <span class="tool-tag">ClickFunnels</span>
+      <span class="tool-tag">MyCX (GoHighLevel)</span>
+      <span class="tool-tag">ConvertKit</span>
+      <span class="tool-tag">WordPress</span>
+      <span class="tool-tag">Zapier</span>
+      <span class="tool-tag">Canva</span>
+      <span class="tool-tag">ClickUp</span>
+      <span class="tool-tag">Google Drive</span>
+      <span class="tool-tag">Google Sheets</span>
+      <span class="tool-tag">Buzzsprout (planned)</span>
+      <span class="tool-tag">Facebook Business Manager</span>
+      <span class="tool-tag">Lucidchart</span>
+    </div>
+    <p style="margin-top:28px;font-size:13px;">
+      <a href="https://yourtechunicorn.com/portfolio/">← Back to Portfolio</a> &nbsp;·&nbsp;
+      <a href="https://yourtechunicorn.com/case-study/">See the GHL Migration Case Study →</a>
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-heading">Managing a complex launch or migration?</div>
+  <p class="cta-sub">Let's talk through your current setup and what a structured approach would look like for your team.</p>
+  <a href="https://yourtechunicorn.com/contact/" class="btn-primary">Book a Discovery Call</a>
+  <a href="https://yourtechunicorn.com/portfolio/" class="btn-ghost">View More Work</a>
+</section>
+
+<footer>
+  <a href="https://yourtechunicorn.com/" class="nav-logo">
+    <div class="nav-badge">YTU</div>
+    <div class="nav-text">
+      <span class="nav-name">your tech unicorn</span>
+      <span class="nav-descriptor">Systems & Automation</span>
+    </div>
+  </a>
+  <span class="footer-copy">© 2026 Hey Miss Adventures LLC · yourtechunicorn.com</span>
+  <ul class="footer-links">
+    <li><a href="https://yourtechunicorn.com/portfolio/">Portfolio</a></li>
+    <li><a href="https://yourtechunicorn.com/services/">Services</a></li>
+    <li><a href="https://yourtechunicorn.com/blog/">Blog</a></li>
+    <li><a href="https://yourtechunicorn.com/contact/">Contact</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
